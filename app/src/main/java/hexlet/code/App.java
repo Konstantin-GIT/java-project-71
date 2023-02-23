@@ -7,9 +7,11 @@ import picocli.CommandLine.Command;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-@Command(name = "gendiff",  version = "Differ 1.0", mixinStandardHelpOptions = true,  description = "Compares two configuration files and shows a difference.")
+@Command(name = "gendiff",  version = "Differ 1.0", mixinStandardHelpOptions = true,
+        description = "Compares two configuration files and shows a difference.")
 public class App implements Callable {
-    @Option(names = { "-f", "--format" }, paramLabel = "format", description = "output format [default: stylish]", defaultValue = "stylish")
+    @Option(names = { "-f", "--format" }, paramLabel = "format",
+        description = "output format [default: stylish]", defaultValue = "stylish")
     String format;
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     private String filePath1;
@@ -22,7 +24,7 @@ public class App implements Callable {
         String differBetweenTwoFiles = "Method execution error";
         try {
             differBetweenTwoFiles = Differ.generate(filePath1, filePath2);
-        } catch ( IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
             return e.toString();
         }

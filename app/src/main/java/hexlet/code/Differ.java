@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -17,8 +16,10 @@ public class Differ {
         Path file1 = Paths.get(filePath1);
         Path file2 = Paths.get(filePath2);
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> jsonToParse1 = objectMapper.readValue(file1.toFile(), new TypeReference<Map<String,Object>>(){});
-        Map<String, Object> jsonToParse2 = objectMapper.readValue(file2.toFile(), new TypeReference<Map<String,Object>>(){});
+        Map<String, Object> jsonToParse1 =
+                objectMapper.readValue(file1.toFile(), new TypeReference<Map<String, Object>>(){});
+        Map<String, Object> jsonToParse2 =
+                objectMapper.readValue(file2.toFile(), new TypeReference<Map<String, Object>>(){});
         Set<String> keys = new TreeSet<>(jsonToParse1.keySet());
         keys.addAll(jsonToParse2.keySet());
         StringBuilder differJso1AndJson2 = new StringBuilder();
