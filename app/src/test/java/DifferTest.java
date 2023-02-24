@@ -16,7 +16,7 @@ class DifferTest {
                 + "  - proxy: 123.234.53.22\n"
                 + "  - timeout: 50\n"
                 + "  + timeout: 20\n"
-                + "  + verbose: true\n"
+                + "  + 1verbose: true\n"
                 + "}";
         String actual = Differ.generate(path1, path2);
         assertEquals(expected, actual);
