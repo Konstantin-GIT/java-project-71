@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 group 'hexlet.code'
@@ -9,6 +10,12 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
 
 dependencies {
@@ -29,3 +36,4 @@ application {
 compileJava {
     options.release = 17
 }
+
