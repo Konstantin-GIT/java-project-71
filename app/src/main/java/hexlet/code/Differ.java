@@ -42,7 +42,7 @@ public class Differ {
         return differJso1AndJson2.toString();
     }
     public static File getFileByPath(String filePath) {
-        Path file1 = Paths.get(filePath);
-        return file1.toFile();
+        Path fullPath = Paths.get(filePath).toAbsolutePath().normalize();
+        return fullPath.toFile();
     }
 }

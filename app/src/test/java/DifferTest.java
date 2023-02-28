@@ -7,8 +7,8 @@ class DifferTest {
 
     @Test
     public void testGenerate() throws IOException {
-        String path1 = "/home/runner/work/java-project-71/java-project-71/app/src/main/resources/file1.json";
-        String path2 = "/home/runner/work/java-project-71/java-project-71/app/src/main/resources/file2.json";
+        String path1 = "src/main/resources/file1.json";
+        String path2 = "src/main/resources/file2.json";
 
         String expected = "{\n"
                 + "  - follow: false\n"
