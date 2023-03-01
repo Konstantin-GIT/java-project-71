@@ -6,6 +6,9 @@ run-dist:
 build:
 	./gradlew build
 
+run:
+	./gradlew run
+
 test:
 	./gradlew test
 
