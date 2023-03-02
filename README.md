@@ -4,3 +4,10 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c98d7895c11357084bfc/maintainability)](https://codeclimate.com/github/Konstantin-GIT/java-project-71/maintainability)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c98d7895c11357084bfc/test_coverage)](https://codeclimate.com/github/Konstantin-GIT/java-project-71/test_coverage)
+
+Description
+Difference Calculator is a program that determines the difference between two data structures. This is a popular task, for which there are many online services, for example: http://www.jsondiff.com/. A similar mechanism is used when outputting tests or when automatically tracking changes in configuration files.
+
+Project demonstration:
+
+step 7: https://asciinema.org/a/0MUfHCqhnVvIQoWLxErt28jzp
