@@ -1,50 +1,72 @@
 package hexlet.code;
 
-import java.io.File;
+import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static hexlet.code.Parser.jsonToMapParsing;
+import static hexlet.code.Parser.getData;
 
 public class Differ {
 
-    public static String generate(String filePath1, String filePath2) throws IOException {
-        File file1 = getFileByPath(filePath1);
-        File file2 = getFileByPath(filePath2);
+    public static String generate(String filePath1, String filePath2, String format) throws IOException {
+        Map<String, Object> dataOfFile1 = getData(filePath1);
+        Map<String, Object> dataOfFile2 = getData(filePath2);
 
-        Map<String, Object> jsonToParse1 = jsonToMapParsing(file1);
-        Map<String, Object> jsonToParse2 = jsonToMapParsing(file2);
-
-        return getDifferences(jsonToParse1, jsonToParse2);
-    }
-    public static File getFileByPath(String filePath) {
-        Path fullPath = Paths.get(filePath).toAbsolutePath().normalize();
-        return fullPath.toFile();
+        return getDifferences(dataOfFile1, dataOfFile2, format);
     }
 
-    public static String getDifferences(Map<String, Object> data1, Map<String, Object> data2) {
+
+    public static String getDifferences(Map<String, Object> data1, Map<String, Object> data2, String format) {
         Set<String> keys = new TreeSet<>(data1.keySet());
         keys.addAll(data2.keySet());
         StringBuilder differJso1AndJson2 = new StringBuilder();
-        differJso1AndJson2.append("{\n");
-        for (String key: keys) {
-            if (!data1.containsKey(key)) {
-                differJso1AndJson2.append("  + " +  key + ": " + data2.get(key) + "\n");
-            } else if (!data2.containsKey(key)) {
-                differJso1AndJson2.append("  - " +  key + ": " + data1.get(key) + "\n");
-            } else if (data1.get(key).equals(data2.get(key))) {
-                differJso1AndJson2.append("    " +  key + ": " + data1.get(key) + "\n");
-            } else {
-                differJso1AndJson2.append("  - " +  key + ": " + data1.get(key) + "\n");
-                differJso1AndJson2.append("  + " +  key + ": " + data2.get(key) + "\n");
+
+        if (format.equals("plain")) {
+            for (String key : keys) {
+                if (!data1.containsKey(key)) {
+                    differJso1AndJson2.append("Property '" + key + "' was added with value: " + convertToPlainFormat(data2.get(key)) + "\n");
+                } else if (!data2.containsKey(key)) {
+                    differJso1AndJson2.append("Property '" + key + "' was removed\n");
+                } else if (data1.get(key).equals(data2.get(key))) {
+                    differJso1AndJson2.append("Property '" + key + "' was update. From "
+                            + convertToPlainFormat(data1.get(key)) + " to " + convertToPlainFormat(data2.get(key)) + "\n");
+                }
             }
+            System.out.println(differJso1AndJson2);
+        } else if (format.equals("stylish")) {
+            differJso1AndJson2.append("{\n");
+            for (String key : keys) {
+                if (!data1.containsKey(key)) {
+                    differJso1AndJson2.append("  + " + key + ": " + data2.get(key) + "\n");
+                } else if (!data2.containsKey(key)) {
+                    differJso1AndJson2.append("  - " + key + ": " + data1.get(key) + "\n");
+                } else if (data1.get(key).equals(data2.get(key))) {
+                    differJso1AndJson2.append("    " + key + ": " + data1.get(key) + "\n");
+                } else {
+                    differJso1AndJson2.append("  - " + key + ": " + data1.get(key) + "\n");
+                    differJso1AndJson2.append("  + " + key + ": " + data2.get(key) + "\n");
+                }
+            }
+            differJso1AndJson2.append("}");
+            System.out.println(differJso1AndJson2);
         }
-        differJso1AndJson2.append("}");
-        System.out.println(differJso1AndJson2);
         return differJso1AndJson2.toString();
     }
+
+    public static String convertToPlainFormat(Object data) {
+        if (data instanceof String) {
+            return "'" + data + "'";
+        } else if (data instanceof Boolean) {
+            return data.toString();
+        } else if (data instanceof Integer) {
+            return data.toString();
+        } else if ((data instanceof Map<?,?> || data instanceof List<?>)) {
+            return "[" + data + "]";
+        } else return data.toString();
+    }
+
+
 }
