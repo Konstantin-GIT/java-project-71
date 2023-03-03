@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -27,12 +26,14 @@ public class Differ {
         if (format.equals("plain")) {
             for (String key : keys) {
                 if (!data1.containsKey(key)) {
-                    differJso1AndJson2.append("Property '" + key + "' was added with value: " + convertToPlainFormat(data2.get(key)) + "\n");
+                    differJso1AndJson2.append("Property '" + key
+                            + "' was added with value: " + convertToPlainFormat(data2.get(key)) + "\n");
                 } else if (!data2.containsKey(key)) {
                     differJso1AndJson2.append("Property '" + key + "' was removed\n");
                 } else if (data1.get(key).equals(data2.get(key))) {
                     differJso1AndJson2.append("Property '" + key + "' was update. From "
-                            + convertToPlainFormat(data1.get(key)) + " to " + convertToPlainFormat(data2.get(key)) + "\n");
+                            + convertToPlainFormat(data1.get(key)) + " to "
+                            + convertToPlainFormat(data2.get(key)) + "\n");
                 }
             }
             System.out.println(differJso1AndJson2);
@@ -63,9 +64,11 @@ public class Differ {
             return data.toString();
         } else if (data instanceof Integer) {
             return data.toString();
-        } else if ((data instanceof Map<?,?> || data instanceof List<?>)) {
+        } else if (data instanceof Map<?, ?> || data instanceof List<?>) {
             return "[" + data + "]";
-        } else return data.toString();
+        } else {
+            return data.toString();
+        }
     }
 
 
