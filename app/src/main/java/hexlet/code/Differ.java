@@ -1,10 +1,7 @@
 package hexlet.code;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import static hexlet.code.Parser.getData;
 
@@ -13,63 +10,63 @@ public class Differ {
     public static String generate(String filePath1, String filePath2, String format) throws IOException {
         Map<String, Object> dataOfFile1 = getData(filePath1);
         Map<String, Object> dataOfFile2 = getData(filePath2);
-
-        return getDifferences(dataOfFile1, dataOfFile2, format);
+        //System.out.println(dataOfFile1);
+        //System.out.println(dataOfFile2);
+        List<DataDifferences>  dataDifferences = getDifferences(dataOfFile1, dataOfFile2);
+        if (format.equals("plain")) {
+            return Formater.outputDifferencesPlain(dataDifferences);
+        } else {
+            return Formater.outputDifferencesStylish(dataDifferences);
+        }
     }
 
-
-    public static String getDifferences(Map<String, Object> data1, Map<String, Object> data2, String format) {
+    public static List<DataDifferences> getDifferences(Map<String, Object> data1, Map<String, Object> data2) {
         Set<String> keys = new TreeSet<>(data1.keySet());
         keys.addAll(data2.keySet());
-        StringBuilder differJso1AndJson2 = new StringBuilder();
-
-        if (format.equals("plain")) {
-            for (String key : keys) {
-                if (!data1.containsKey(key)) {
-                    differJso1AndJson2.append("Property '" + key
-                            + "' was added with value: " + convertToPlainFormat(data2.get(key)) + "\n");
-                } else if (!data2.containsKey(key)) {
-                    differJso1AndJson2.append("Property '" + key + "' was removed\n");
-                } else if (data1.get(key).equals(data2.get(key))) {
-                    differJso1AndJson2.append("Property '" + key + "' was update. From "
-                            + convertToPlainFormat(data1.get(key)) + " to "
-                            + convertToPlainFormat(data2.get(key)) + "\n");
-                }
+        List<DataDifferences> dataDifferences = new ArrayList<DataDifferences>();
+        for (String key: keys) {
+            DataDifferences itemDataDifference = new DataDifferences();
+            if (!data1.containsKey(key)) {
+                itemDataDifference.setChangeStatus("added")
+                        .setKey(key)
+                        .setValue2(data2.get(key));
+                dataDifferences.add(itemDataDifference);
+            } else if (!data2.containsKey(key)) {
+                itemDataDifference.setChangeStatus("deleted")
+                            .setKey(key)
+                            .setValue1(data1.get(key));
+                dataDifferences.add(itemDataDifference);
+            } else if (data1.get(key) == null && data2.get(key) == null) {
+                itemDataDifference.setChangeStatus("unchanged")
+                        .setKey(key)
+                        .setValue1(null);
+                dataDifferences.add(itemDataDifference);
+            } else if (data1.get(key) == null && data2.get(key) != null) {
+                itemDataDifference.setChangeStatus("changed")
+                        .setKey(key)
+                        .setValue1(null)
+                        .setValue2(data2.get(key));
+                dataDifferences.add(itemDataDifference);
+            } else if (data1.get(key) != null && data2.get(key) == null) {
+                itemDataDifference.setChangeStatus("changed")
+                        .setKey(key)
+                        .setValue1(data1.get(key))
+                        .setValue2(null);
+                dataDifferences.add(itemDataDifference);
+            } else if (data1.get(key).equals(data2.get(key))) {
+                itemDataDifference.setChangeStatus("unchanged")
+                        .setKey(key)
+                        .setValue1(data1.get(key));
+                dataDifferences.add(itemDataDifference);
+            } else {
+                itemDataDifference.setChangeStatus("changed")
+                                    .setKey(key)
+                                    .setValue1(data1.get(key))
+                                    .setValue2(data2.get(key));
+                dataDifferences.add(itemDataDifference);
             }
-            System.out.println(differJso1AndJson2);
-        } else if (format.equals("stylish")) {
-            differJso1AndJson2.append("{\n");
-            for (String key : keys) {
-                if (!data1.containsKey(key)) {
-                    differJso1AndJson2.append("  + " + key + ": " + data2.get(key) + "\n");
-                } else if (!data2.containsKey(key)) {
-                    differJso1AndJson2.append("  - " + key + ": " + data1.get(key) + "\n");
-                } else if (data1.get(key).equals(data2.get(key))) {
-                    differJso1AndJson2.append("    " + key + ": " + data1.get(key) + "\n");
-                } else {
-                    differJso1AndJson2.append("  - " + key + ": " + data1.get(key) + "\n");
-                    differJso1AndJson2.append("  + " + key + ": " + data2.get(key) + "\n");
-                }
-            }
-            differJso1AndJson2.append("}");
-            System.out.println(differJso1AndJson2);
         }
-        return differJso1AndJson2.toString();
+        //System.out.println(dataDifferences);
+        return dataDifferences;
     }
-
-    public static String convertToPlainFormat(Object data) {
-        if (data instanceof String) {
-            return "'" + data + "'";
-        } else if (data instanceof Boolean) {
-            return data.toString();
-        } else if (data instanceof Integer) {
-            return data.toString();
-        } else if (data instanceof Map<?, ?> || data instanceof List<?>) {
-            return "[" + data + "]";
-        } else {
-            return data.toString();
-        }
-    }
-
-
 }

@@ -11,3 +11,4 @@ Difference Calculator is a program that determines the difference between two da
 Project demonstration:
 
 step 7: https://asciinema.org/a/0MUfHCqhnVvIQoWLxErt28jzp
+step 8: https://asciinema.org/a/CnruBOhGwvv2zqN0sNnzZuzVF
