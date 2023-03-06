@@ -22,7 +22,7 @@ public class PlainFormatter {
                     break;
                 case "changed":
                     differJso1AndJson2.append("Property " + convertToPlainFormat(item.getKey())
-                            + " was update. From " + convertToPlainFormat(item.getInitialValue())
+                            + " was updated. From " + convertToPlainFormat(item.getInitialValue())
                             + " to " + convertToPlainFormat(item.getUpdatedValue()) + "\n");
                     break;
                 default:
