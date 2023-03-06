@@ -9,7 +9,8 @@ import java.util.List;
 
 public class Formatter {
 
-    public static String outputDifferences(List<DataDifferences>  dataDifferences, String format) throws JsonProcessingException {
+    public static String outputDifferences(List<DataDifferences>  dataDifferences, String format)
+            throws JsonProcessingException {
         if (format.equals("plain")) {
             return PlainFormatter.outputDifferencesPlain(dataDifferences);
         } else if (format.equals("json")) {
