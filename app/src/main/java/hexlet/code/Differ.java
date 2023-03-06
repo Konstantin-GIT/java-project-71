@@ -16,14 +16,11 @@ public class Differ {
     public static String generate(String filePath1, String filePath2, String format) throws IOException {
         Map<String, Object> dataOfFile1 = getData(filePath1);
         Map<String, Object> dataOfFile2 = getData(filePath2);
-        //System.out.println(dataOfFile1);
-        //System.out.println(dataOfFile2);
+
         List<DataDifferences>  dataDifferences = getDifferences(dataOfFile1, dataOfFile2);
-        if (format.equals("plain")) {
-            return Formater.outputDifferencesPlain(dataDifferences);
-        } else {
-            return Formater.outputDifferencesStylish(dataDifferences);
-        }
+
+        return Formatter.outputDifferences(dataDifferences, format);
+
     }
 
     public static List<DataDifferences> getDifferences(Map<String, Object> data1, Map<String, Object> data2) {
