@@ -15,8 +15,10 @@ public class Formatter {
             return PlainFormatter.outputDifferencesPlain(dataDifferences);
         } else if (format.equals("json")) {
             return JsonFormatter.outputDifferencesJson(dataDifferences);
-        } else {
+        } else if (format.equals("stylish")) {
             return StylishFormatter.outputDifferencesStylish(dataDifferences);
+        } else {
+            throw new RuntimeException("Invalid format specified");
         }
     }
 }

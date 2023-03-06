@@ -23,6 +23,18 @@ public class Differ {
 
     }
 
+    public static String generate(String filePath1, String filePath2) throws IOException {
+        String format = "stylish";
+        Map<String, Object> dataOfFile1 = getData(filePath1);
+        Map<String, Object> dataOfFile2 = getData(filePath2);
+
+        List<DataDifferences>  dataDifferences = getDifferences(dataOfFile1, dataOfFile2);
+
+        return Formatter.outputDifferences(dataDifferences, format);
+
+    }
+
+
     public static List<DataDifferences> getDifferences(Map<String, Object> data1, Map<String, Object> data2) {
         Set<String> keys = new TreeSet<>(data1.keySet());
         keys.addAll(data2.keySet());
