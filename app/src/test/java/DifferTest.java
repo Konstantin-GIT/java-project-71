@@ -7,8 +7,8 @@ class DifferTest {
 
     @Test
     public void testGenerateForJson() throws IOException {
-        String path1 = "src/main/resources/file1.json";
-        String path2 = "src/main/resources/file2.json";
+        String path1 = "src/main/resources/fixtures/file1.json";
+        String path2 = "src/main/resources/fixtures/file2.json";
         String format = "stylish";
 
         String expected = "{\n"
@@ -42,8 +42,8 @@ class DifferTest {
 
     @Test
     public void testGenerateForYaml() throws IOException {
-        String path1 = "src/main/resources/file1.yaml";
-        String path2 = "src/main/resources/file2.yaml";
+        String path1 = "src/main/resources/fixtures/file1.yaml";
+        String path2 = "src/main/resources/fixtures/file2.yaml";
         String format = "stylish";
 
         String expected = "{\n"
@@ -77,8 +77,8 @@ class DifferTest {
 
     @Test
     public void testGenerateForYamlOutputPlain() throws IOException {
-        String path1 = "src/main/resources/file1.yaml";
-        String path2 = "src/main/resources/file2.yaml";
+        String path1 = "src/main/resources/fixtures/file1.yaml";
+        String path2 = "src/main/resources/fixtures/file2.yaml";
         String format = "plain";
 
         String expected = "Property 'chars2' was update. From [complex value] to false\n"
@@ -99,8 +99,8 @@ class DifferTest {
     }
     @Test
     public void testGenerateForJsonOutputPlain() throws IOException {
-        String path1 = "src/main/resources/file1.json";
-        String path2 = "src/main/resources/file2.json";
+        String path1 = "src/main/resources/fixtures/file1.json";
+        String path2 = "src/main/resources/fixtures/file2.json";
         String format = "plain";
 
         String expected = "Property 'chars2' was update. From [complex value] to false\n"
