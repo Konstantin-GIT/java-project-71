@@ -21,7 +21,7 @@ public class DataDifferences {
     }
 
     public DataDifferences setKey(String keyValue) {
-        this.key = key;
+        this.key = keyValue;
         return this;
     }
 
