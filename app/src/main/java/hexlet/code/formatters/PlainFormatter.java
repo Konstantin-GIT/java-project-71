@@ -9,21 +9,33 @@ public class PlainFormatter {
 
     public static String outputDifferencesPlain(List<DataDifferences> dataDifferences) {
         StringBuilder differJso1AndJson2 = new StringBuilder();
-        for (DataDifferences item : dataDifferences) {
-            switch (item.getChangeStatus()) {
+        int lastLinePosition = dataDifferences.size() - 1;
+        for (int i = 0; i < dataDifferences.size(); i++) {
+            switch (dataDifferences.get(i).getChangeStatus()) {
                 case "added":
-                    differJso1AndJson2.append("Property " + convertToPlainFormat(item.getKey())
-                            + " was added with value: " + convertToPlainFormat(item.getUpdatedValue()) + "\n");
+                    differJso1AndJson2.append("Property " + convertToPlainFormat(dataDifferences.get(i).getKey())
+                            + " was added with value: "
+                            + convertToPlainFormat(dataDifferences.get(i).getUpdatedValue()));
+                    if (lastLinePosition != i) {
+                        differJso1AndJson2.append("\n");
+                    }
                     break;
                 case "deleted":
-                    differJso1AndJson2.append("Property " + convertToPlainFormat(item.getKey()) + " was removed\n");
+                    differJso1AndJson2.append("Property "
+                            + convertToPlainFormat(dataDifferences.get(i).getKey()) + " was removed");
+                    if (lastLinePosition != i) {
+                        differJso1AndJson2.append("\n");
+                    }
                     break;
                 case "unchanged":
                     break;
                 case "changed":
-                    differJso1AndJson2.append("Property " + convertToPlainFormat(item.getKey())
-                            + " was updated. From " + convertToPlainFormat(item.getInitialValue())
-                            + " to " + convertToPlainFormat(item.getUpdatedValue()) + "\n");
+                    differJso1AndJson2.append("Property " + convertToPlainFormat(dataDifferences.get(i).getKey())
+                            + " was updated. From " + convertToPlainFormat(dataDifferences.get(i).getInitialValue())
+                            + " to " + convertToPlainFormat(dataDifferences.get(i).getUpdatedValue()));
+                    if (lastLinePosition != i) {
+                        differJso1AndJson2.append("\n");
+                    }
                     break;
                 default:
                     throw new RuntimeException("The value in "
