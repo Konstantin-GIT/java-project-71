@@ -3,16 +3,16 @@ package hexlet.code;
 public class DataDifferences {
     private String changeStatus;
     private String key;
-    private Object value1;
-    private Object value2;
+    private Object initialValue;
+    private Object updatedValue;
 
 
     public String getChangeStatus() {
         return changeStatus;
     }
 
-    public DataDifferences setChangeStatus(String changeStatus) {
-        this.changeStatus = changeStatus;
+    public DataDifferences setChangeStatus(String status) {
+        this.changeStatus = status;
         return this;
     }
 
@@ -20,31 +20,32 @@ public class DataDifferences {
         return key;
     }
 
-    public DataDifferences setKey(String key) {
+    public DataDifferences setKey(String keyValue) {
         this.key = key;
         return this;
     }
 
-    public Object getValue1() {
-        return value1;
+    public Object getInitialValue() {
+        return initialValue;
     }
 
-    public DataDifferences setValue1(Object value1) {
-        this.value1 = value1;
+    public DataDifferences setInitialValue(Object value) {
+        this.initialValue = value;
         return this;
     }
 
-    public Object getValue2() {
-        return value2;
+    public Object getUpdatedValue() {
+        return updatedValue;
     }
 
-    public DataDifferences setValue2(Object value2) {
-        this.value2 = value2;
+    public DataDifferences setUpdatedValue(Object value) {
+        this.updatedValue = value;
         return this;
     }
 
     public String toString() {
         return "\nchangeStatus: " + changeStatus + ",\n"
-                + "key: " + key +  ",\n" +"value1: " + value1  + ",\n" + "value2: " + value2 +"\n";
+                + "key: " + key + ",\n" + "initialValue: "
+                + initialValue + ",\n" + "updatedValue: " + updatedValue + "\n";
     }
 }
