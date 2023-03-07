@@ -18,7 +18,7 @@ public class Formatter {
         } else if (format.equals("stylish")) {
             return StylishFormatter.outputDifferencesStylish(dataDifferences);
         } else {
-            throw new RuntimeException("Invalid format specified");
+            return "Invalid format specified";
         }
     }
 }

@@ -33,9 +33,9 @@ public class App implements Callable {
     }
 
     public static void main(String[] args) {
-            App app = new App();
-            int exitCode = new CommandLine(app).execute(args);
-            System.exit(exitCode);
+        App app = new App();
+        int exitCode = new CommandLine(app).execute(args);
+        System.exit(exitCode);
     }
 }
 
