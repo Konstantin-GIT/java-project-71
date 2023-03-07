@@ -42,7 +42,6 @@ public class PlainFormatter {
                             + "the method outputDifferencesStylish in the operator switch is incorrect.");
             }
         }
-        System.out.println(differJso1AndJson2);
         return differJso1AndJson2.toString();
     }
     public static String convertToPlainFormat(Object data) {

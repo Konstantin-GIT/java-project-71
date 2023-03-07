@@ -34,7 +34,6 @@ public class StylishFormatter {
             }
         }
         differJso1AndJson2.append("}");
-        System.out.println(differJso1AndJson2);
         return differJso1AndJson2.toString();
     }
 }

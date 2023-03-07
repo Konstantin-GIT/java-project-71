@@ -11,7 +11,6 @@ public class JsonFormatter {
         ObjectMapper objectMapper = new ObjectMapper();
         String result = "";
         result = objectMapper.writeValueAsString(dataDifferences);
-        System.out.println(result);
         return result;
     }
 }

@@ -24,6 +24,7 @@ public class App implements Callable {
         String differBetweenTwoFiles = "Method execution error";
         try {
             differBetweenTwoFiles = Differ.generate(filePath1, filePath2, format);
+            System.out.println(differBetweenTwoFiles);
         } catch (IOException e) {
             System.out.println(e);
             return e.toString();
