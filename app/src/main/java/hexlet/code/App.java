@@ -32,15 +32,10 @@ public class App implements Callable {
         return differBetweenTwoFiles;
     }
 
-    public static void main(String[] args) throws IOException {
-        try {
+    public static void main(String[] args) {
             App app = new App();
             int exitCode = new CommandLine(app).execute(args);
             System.exit(exitCode);
-            app.call();
-        } catch (IOException e) {
-            System.out.println();
-        }
     }
 }
 
