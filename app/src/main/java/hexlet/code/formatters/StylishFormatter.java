@@ -1,8 +1,8 @@
 package hexlet.code.formatters;
 
 import hexlet.code.DataDifferences;
-
 import java.util.List;
+
 
 public class StylishFormatter {
 
@@ -20,7 +20,7 @@ public class StylishFormatter {
                             + "- " + item.getKey() + ": " + item.getInitialValue() + "\n");
                     break;
                 case "unchanged":
-                    differJso1AndJson2.append(" ".repeat(4) + item.getKey() + ": " + item.getInitialValue() + "\n");
+                    differJso1AndJson2.append("  ".repeat(2) + item.getKey() + ": " + item.getInitialValue() + "\n");
                     break;
                 case "changed":
                     differJso1AndJson2.append(" ".repeat(2)

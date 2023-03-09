@@ -1,6 +1,6 @@
 package hexlet.code;
 
-public class DataDifferences {
+public final class DataDifferences {
     private String changeStatus;
     private String key;
     private Object initialValue;
