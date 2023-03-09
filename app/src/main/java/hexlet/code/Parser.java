@@ -22,7 +22,7 @@ public class Parser {
     public static ObjectMapper getDataMapper(String filePath) {
         if (getExtensionFile(filePath).equals("json")) {
             return new ObjectMapper();
-        } else if (getExtensionFile(filePath).equals("yaml") || getExtensionFile(filePath).equals("yml")) {
+        } else if (getExtensionFile(filePath).equals("yml")) {
             return new YAMLMapper();
         } else {
             System.out.println("Error: invalid file format.");

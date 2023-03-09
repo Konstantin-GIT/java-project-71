@@ -42,8 +42,8 @@ class DifferTest {
 
     @Test
     public void testGenerateForYaml() throws IOException {
-        String path1 = "src/main/resources/fixtures/file1.yaml";
-        String path2 = "src/main/resources/fixtures/file2.yaml";
+        String path1 = "src/main/resources/fixtures/file1.yml";
+        String path2 = "src/main/resources/fixtures/file2.yml";
         String format = "stylish";
 
         String expected = "{\n"
@@ -77,8 +77,8 @@ class DifferTest {
 
     @Test
     public void testGenerateForYamlOutputPlain() throws IOException {
-        String path1 = "src/main/resources/fixtures/file1.yaml";
-        String path2 = "src/main/resources/fixtures/file2.yaml";
+        String path1 = "src/main/resources/fixtures/file1.yml";
+        String path2 = "src/main/resources/fixtures/file2.yml";
         String format = "plain";
 
         String expected = "Property 'chars2' was updated. From [complex value] to false\n"
