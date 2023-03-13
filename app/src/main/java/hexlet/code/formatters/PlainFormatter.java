@@ -1,41 +1,31 @@
 package hexlet.code.formatters;
 
 import hexlet.code.DataDifferences;
-
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public class PlainFormatter {
 
     public static String outputDifferencesPlain(List<DataDifferences> dataDifferences) {
-        StringBuilder differJso1AndJson2 = new StringBuilder();
-        int lastLinePosition = dataDifferences.size() - 1;
-        for (int i = 0; i < dataDifferences.size(); i++) {
-            switch (dataDifferences.get(i).getChangeStatus()) {
+        StringJoiner differJso1AndJson2 = new StringJoiner("\n");
+        for (DataDifferences dataDifference : dataDifferences) {
+            switch (dataDifference.getChangeStatus()) {
                 case "added":
-                    differJso1AndJson2.append("Property " + convertToPlainFormat(dataDifferences.get(i).getKey())
+                    differJso1AndJson2.add("Property " + convertToPlainFormat(dataDifference.getKey())
                             + " was added with value: "
-                            + convertToPlainFormat(dataDifferences.get(i).getUpdatedValue()));
-                    if (lastLinePosition != i) {
-                        differJso1AndJson2.append("\n");
-                    }
+                            + convertToPlainFormat(dataDifference.getUpdatedValue()));
                     break;
                 case "deleted":
-                    differJso1AndJson2.append("Property "
-                            + convertToPlainFormat(dataDifferences.get(i).getKey()) + " was removed");
-                    if (lastLinePosition != i) {
-                        differJso1AndJson2.append("\n");
-                    }
+                    differJso1AndJson2.add("Property "
+                            + convertToPlainFormat(dataDifference.getKey()) + " was removed");
                     break;
                 case "unchanged":
                     break;
                 case "changed":
-                    differJso1AndJson2.append("Property " + convertToPlainFormat(dataDifferences.get(i).getKey())
-                            + " was updated. From " + convertToPlainFormat(dataDifferences.get(i).getInitialValue())
-                            + " to " + convertToPlainFormat(dataDifferences.get(i).getUpdatedValue()));
-                    if (lastLinePosition != i) {
-                        differJso1AndJson2.append("\n");
-                    }
+                    differJso1AndJson2.add("Property " + convertToPlainFormat(dataDifference.getKey())
+                            + " was updated. From " + convertToPlainFormat(dataDifference.getInitialValue())
+                            + " to " + convertToPlainFormat(dataDifference.getUpdatedValue()));
                     break;
                 default:
                     throw new RuntimeException("The value in "
