@@ -3,8 +3,6 @@ import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
-
-import java.io.IOException;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff",  version = "gendiff 1.0", mixinStandardHelpOptions = true,
@@ -12,7 +10,7 @@ import java.util.concurrent.Callable;
 public final class App implements Callable {
     @Option(names = { "-f", "--format" }, paramLabel = "format",
         description = "output format [default: stylish]", defaultValue = "stylish")
-    private static String format;
+    private static String formatOutput;
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     private String filePath1;
     @Parameters(paramLabel = "filepath2", description = "path to second file")
@@ -20,16 +18,16 @@ public final class App implements Callable {
 
 
     @Override
-    public String call() throws IOException {
-        String differBetweenTwoFiles = "Method execution error";
+    public Integer call() {
         try {
-            differBetweenTwoFiles = Differ.generate(filePath1, filePath2, format);
-            System.out.println(differBetweenTwoFiles);
-        } catch (IOException e) {
-            System.out.println(e);
-            return e.toString();
+            String formattedDiff = Differ.generate(filePath1, filePath2, formatOutput);
+            System.out.println(formattedDiff);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return 1;
         }
-        return differBetweenTwoFiles;
+
+        return 0;
     }
 
     public static void main(String[] args) {
