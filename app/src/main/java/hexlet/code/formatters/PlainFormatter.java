@@ -44,21 +44,15 @@ public class PlainFormatter {
         }
         return differJso1AndJson2.toString();
     }
-    public static String convertToPlainFormat(Object data) {
+    private static String convertToPlainFormat(Object data) {
         if (data == null) {
             return "null";
         }
         if (data instanceof String) {
             return "'" + data + "'";
-        } else if (data instanceof Boolean) {
-            return data.toString();
-        } else if (data instanceof Integer) {
-            return data.toString();
         } else if (data instanceof Map<?, ?> || data instanceof List<?>) {
             return "[complex value]";
-        } else {
-            return data.toString();
         }
+        return data.toString();
     }
-
 }

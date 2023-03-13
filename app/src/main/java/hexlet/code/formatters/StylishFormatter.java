@@ -29,8 +29,8 @@ public class StylishFormatter {
                             + "+ " + item.getKey() + ": " + item.getUpdatedValue() + "\n");
                     break;
                 default:
-                    throw new RuntimeException("The value in the method "
-                            + "outputDifferencesStylish in the operator switch is incorrect.");
+                    throw new RuntimeException("Incorrect input ChangeStatus = <"
+                            + item.getChangeStatus() + "> in the method outputDifferencesStylish .");
             }
         }
         differJso1AndJson2.append("}");

@@ -9,16 +9,17 @@ import java.util.List;
 
 public class Formatter {
 
-    public static String outputDifferences(List<DataDifferences>  dataDifferences, String format)
+    public static String outputDifferences(List<DataDifferences>  dataDifferences, String formatOutput)
             throws JsonProcessingException {
-        if (format.equals("plain")) {
-            return PlainFormatter.outputDifferencesPlain(dataDifferences);
-        } else if (format.equals("json")) {
-            return JsonFormatter.outputDifferencesJson(dataDifferences);
-        } else if (format.equals("stylish")) {
-            return StylishFormatter.outputDifferencesStylish(dataDifferences);
-        } else {
-            return "Invalid format specified";
+        switch (formatOutput) {
+            case "plain":
+                return PlainFormatter.outputDifferencesPlain(dataDifferences);
+            case "json":
+                return JsonFormatter.outputDifferencesJson(dataDifferences);
+            case "stylish":
+                return StylishFormatter.outputDifferencesStylish(dataDifferences);
+            default:
+                return "Invalid format specified. The format cannot be equal to <" + formatOutput + ">.";
         }
     }
 }

@@ -15,14 +15,15 @@ public class Parser {
     }
 
     public static ObjectMapper getDataMapper(String formatData) {
-        if (formatData.equals("json")) {
-            return new ObjectMapper();
-        } else if (formatData.equals("yml")) {
-            return new YAMLMapper();
-        } else {
-            System.out.println("Error: invalid file format.");
+        switch (formatData) {
+            case "json":
+                return new ObjectMapper();
+            case "yml":
+                return new YAMLMapper();
+            default:
+                System.out.println("Error: invalid file format.");
+                return new ObjectMapper();
         }
-        return new ObjectMapper();
     }
 
 

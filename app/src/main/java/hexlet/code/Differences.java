@@ -5,6 +5,9 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.Map;
+import java.util.Objects;
+
+
 
 public class Differences {
 
@@ -24,33 +27,16 @@ public class Differences {
                         .setKey(key)
                         .setInitialValue(data1.get(key));
                 dataDifferences.add(itemDataDifference);
-            } else if (data1.get(key) == null && data2.get(key) == null) {
-                itemDataDifference.setChangeStatus("unchanged")
-                        .setKey(key)
-                        .setInitialValue(null);
-                dataDifferences.add(itemDataDifference);
-            } else if (data1.get(key) == null && data2.get(key) != null) {
-                itemDataDifference.setChangeStatus("changed")
-                        .setKey(key)
-                        .setInitialValue(null)
-                        .setUpdatedValue(data2.get(key));
-                dataDifferences.add(itemDataDifference);
-            } else if (data1.get(key) != null && data2.get(key) == null) {
+            } else if (!Objects.equals(data1.get(key), data2.get(key))) {
                 itemDataDifference.setChangeStatus("changed")
                         .setKey(key)
                         .setInitialValue(data1.get(key))
-                        .setUpdatedValue(null);
+                        .setUpdatedValue(data2.get(key));
                 dataDifferences.add(itemDataDifference);
-            } else if (data1.get(key).equals(data2.get(key))) {
+            } else {
                 itemDataDifference.setChangeStatus("unchanged")
                         .setKey(key)
                         .setInitialValue(data1.get(key));
-                dataDifferences.add(itemDataDifference);
-            } else {
-                itemDataDifference.setChangeStatus("changed")
-                        .setKey(key)
-                        .setInitialValue(data1.get(key))
-                        .setUpdatedValue(data2.get(key));
                 dataDifferences.add(itemDataDifference);
             }
         }
