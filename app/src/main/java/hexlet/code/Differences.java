@@ -14,7 +14,7 @@ public class Differences {
     public static List<DataDifferences> getDifferences(Map<String, Object> data1, Map<String, Object> data2) {
         Set<String> keys = new TreeSet<>(data1.keySet());
         keys.addAll(data2.keySet());
-        List<DataDifferences> dataDifferences = new ArrayList<DataDifferences>();
+        List<DataDifferences> dataDifferences = new ArrayList<>();
         for (String key: keys) {
             DataDifferences itemDataDifference = new DataDifferences();
             if (!data1.containsKey(key)) {
@@ -40,7 +40,6 @@ public class Differences {
                 dataDifferences.add(itemDataDifference);
             }
         }
-        //System.out.println(dataDifferences);
         return dataDifferences;
     }
 }
